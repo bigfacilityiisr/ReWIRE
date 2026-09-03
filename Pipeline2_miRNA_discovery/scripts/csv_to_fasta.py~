@@ -1,0 +1,10 @@
+import pandas as pd
+import sys
+
+df = pd.read_csv(sys.argv[1])
+
+with open(sys.argv[2], "w") as f:
+    for i, row in df.iterrows():
+        seq = row["consensus mature sequence"]
+        name = row["provisional id"]
+        f.write(f">{name}\n{seq}\n")

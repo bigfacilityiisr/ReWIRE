@@ -1,0 +1,16 @@
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  - python=3.9
+  - bowtie
+  - samtools
+  - viennarna
+  - randfold
+  - perl
+  - perl-pdf-api2
+  - seqtk
+  - seqkit
+  - mirdeep2

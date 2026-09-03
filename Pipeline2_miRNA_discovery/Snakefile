@@ -1,0 +1,29 @@
+configfile: "config/config.yaml"
+PROJECT=config["project_dir"]
+SAMPLES=config["samples"]
+wildcard_constraints:
+    sample="SRR[0-9]+"
+rule all:
+    input:
+        #expand(f"{PROJECT}/mirdeep/{{sample}}/result_done.txt", sample=SAMPLES),
+        #expand(f"{PROJECT}/mirdeep/{{sample}}_report.txt", sample=SAMPLES),
+        #expand(f"{PROJECT}/mirdeep/{{sample}}_filtered.csv", sample=SAMPLES)
+        "results/mature_miRNAs.fa",
+        "reference/miRBase_db.nsq",
+        "results/mirna_vs_miRBase.txt"
+#include: "rules/download.smk"
+#include: "rules/fasterq.smk"
+#include: "rules/qc.smk"   
+#include: "rules/trimming.smk" 
+#include: "rules/fasta.smk" 
+#include: "rules/filter_ncRNA.smk"  
+#include: "rules/clean_genome.smk" 
+#include: "rules/collapse.smk"
+#include: "rules/mirdeepP2.smk"
+#include: "rules/filter_mirdeep2.smk"
+include: "rules/mirna_to_fasta.smk"
+include: "rules/mirbase_db.smk"  
+include: "rules/blast_mirna.smk"  
+
+
+

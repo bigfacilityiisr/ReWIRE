@@ -1,0 +1,11 @@
+channels:
+  - conda-forge
+  - bioconda
+  
+
+dependencies:
+  - fastqc=0.12.1
+  - cutadapt=4.6
+  - multiqc=1.19
+  - seqtk
+
