@@ -1,0 +1,30 @@
+configfile: "config/config.yaml"
+REF = config["reference"]
+SE_SAMPLES = config["se_samples"]
+PE_SAMPLES = config["pe_samples"]
+SAMPLES = SE_SAMPLES + PE_SAMPLES
+print("Samples:", SAMPLES)
+rule all:
+    input:
+        expand("ddrad_raw-reads/{sample}.fastq.gz", sample=SE_SAMPLES),
+        expand("ddrad_raw-reads/{sample}_R1.fastq.gz", sample=PE_SAMPLES),
+        expand("ddrad_raw-reads/{sample}_R2.fastq.gz", sample=PE_SAMPLES),
+        expand("output/fastqc/{sample}_fastqc.html", sample=SE_SAMPLES),
+        expand("output/fastqc/{sample}_R1_fastqc.html", sample=PE_SAMPLES),
+        expand("output/fastqc/{sample}_R2_fastqc.html", sample=PE_SAMPLES),
+        "results/variants/final_variants.vcf"
+include: "rules/download.smk"
+include: "rules/fasterq.smk"
+include: "rules/fastqc_se.smk"
+include: "rules/fastqc_pe.smk"
+include: "rules/multiqc.smk"
+include: "rules/trimming.smk"
+include: "rules/reference.smk"
+include: "rules/alignment.smk"
+include: "rules/dedup.smk"
+include: "rules/gvcf_r1.smk"
+include: "rules/bqsr.smk"
+include: "rules/gvcf_r2.smk"
+include: "rules/bqsr2.smk"
+include: "rules/bqsr3.smk"
+include: "rules/final_genotype.smk"
