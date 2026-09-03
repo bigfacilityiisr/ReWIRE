@@ -1,0 +1,36 @@
+# ReWIRE merged configuration
+snp:
+  output_dir: "results/snp"
+  samples:
+    - SRR36323020
+    - SRR12116557
+
+  reference_genome: "data/reference/genome.fna"
+  paired_end_samples: []      
+    - SRR107396563
+    - SRR12329118
+    - SRR36323019
+    - ERR4180116
+mirna:
+  output_dir: "results/mirna"
+  samples:
+    - SRR12080165 
+    - SRR12080166 
+    - SRR12080167 
+    - SRR12080168 
+    - SRR12080169
+    - SRR12080170
+    - SRR12080171
+    - SRR12080172
+    - SRR12080173
+    - SRR12080174
+    - SRR12080175
+    - SRR12080176
+  adapter: "AGATCGGAAGAGC"
+  rfam_fasta: "data/reference/rfam.fa"
+  genome_fasta: "data/reference/genome.fna"   # usually same genome as snp.reference_genome
+  mirbase_fasta: "data/reference/mirbase.fa"
+
+integration:
+  output_dir: "results/integration"
+  transcriptome_fasta: "data/reference/transcriptome.fasta"
