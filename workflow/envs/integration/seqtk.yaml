@@ -1,0 +1,6 @@
+name: integration_seqtk
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - seqtk=1.4

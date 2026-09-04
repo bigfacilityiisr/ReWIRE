@@ -1,0 +1,6 @@
+name: integration_bedtools
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - bedtools=2.31

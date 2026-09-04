@@ -1,0 +1,7 @@
+name: integration_r_clusterprofiler
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - r-base=4.3
+  - bioconductor-clusterprofiler=4.10

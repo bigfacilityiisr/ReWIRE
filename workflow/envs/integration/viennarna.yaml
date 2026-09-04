@@ -1,0 +1,6 @@
+name: integration_viennarna
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - viennarna=2.6

@@ -1,0 +1,8 @@
+name: integration_gatk
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - gatk4=4.4.0.0
+  - openjdk=17

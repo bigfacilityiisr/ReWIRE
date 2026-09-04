@@ -1,0 +1,6 @@
+name: integration_interproscan
+channels:
+  - bioconda
+  - conda-forge
+dependencies:
+  - interproscan=5.65_97.0
