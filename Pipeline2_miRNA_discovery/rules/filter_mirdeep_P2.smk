@@ -1,5 +1,5 @@
 PROJECT = config["project_dir"]
-rule filter_mirdeep2:
+rule filter_mirdeep_P2:
     input:
         report=f"{PROJECT}/mirdeep/{{sample}}_report.txt"
     output:
