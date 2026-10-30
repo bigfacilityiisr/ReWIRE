@@ -69,8 +69,8 @@ include: "Pipeline2_miRNA_discovery/rules/clean_genome.smk"
 include: "Pipeline2_miRNA_discovery/rules/collapse.smk"
 # rules/map.smk is intentionally NOT included — see the comment in
 # Pipeline2_miRNA_discovery/Snakefile for why (superseded by collapse.smk).
-include: "Pipeline2_miRNA_discovery/rules/mirdeepP2.smk"
-include: "Pipeline2_miRNA_discovery/rules/filter_mirdeep2.smk"
+include: "Pipeline2_miRNA_discovery/rules/mirdeep_P2.smk"
+include: "Pipeline2_miRNA_discovery/rules/filter_mirdeep_P2.smk"
 include: "Pipeline2_miRNA_discovery/rules/merge_mirna.smk"
 include: "Pipeline2_miRNA_discovery/rules/mirna_to_fasta.smk"
 include: "Pipeline2_miRNA_discovery/rules/mirbase_db.smk"
