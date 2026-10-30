@@ -1,4 +1,4 @@
-rule mirdeep2:
+rule mirdeep_P2:
     input:
         reads=f"{PROJECT}/filtered/{{sample}}.collapsed.fa",
         arf=f"{PROJECT}/filtered/{{sample}}.arf",
