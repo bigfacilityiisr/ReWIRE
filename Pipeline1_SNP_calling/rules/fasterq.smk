@@ -1,11 +1,13 @@
 rule fasterq_se:
     input:
-        "/media/user/DATADRIVE1/SNP_Project/sra/{sample}/{sample}.sra"
+        f"{DATA}/sra/{{sample}}/{{sample}}.sra"
     output:
         f"{DATA}/fastq/{{sample}}.fastq.gz"
     threads: 24
     wildcard_constraints:
         sample="|".join(SE_SAMPLES)
+    conda:
+        "../envs/sra.yaml"
     shell:
         """
         mkdir -p {DATA}/fastq
@@ -15,13 +17,15 @@ rule fasterq_se:
 
 rule fasterq_pe:
     input:
-        "/media/user/DATADRIVE1/SNP_Project/sra/{sample}/{sample}.sra"
+        f"{DATA}/sra/{{sample}}/{{sample}}.sra"
     output:
         R1=f"{DATA}/fastq/{{sample}}_R1.fastq.gz",
         R2=f"{DATA}/fastq/{{sample}}_R2.fastq.gz"
     threads: 24
     wildcard_constraints:
         sample="|".join(PE_SAMPLES)
+    conda:
+        "../envs/sra.yaml"
     shell:
         """
         mkdir -p {DATA}/fastq

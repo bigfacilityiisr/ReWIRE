@@ -1,10 +1,16 @@
 reference: "data/reference/genome.fa"
+data_dir: "data"
 
 se_samples:
-  - SRR12340661
+  - SRR36323020
+  - SRR12116557
+
 
 
 pe_samples:
   - SRR36323019
+  - SRR10739563
+  - SRR12329118
+  - ERR4180116
 
 samples_file: "metadata/samples.csv"

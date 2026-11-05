@@ -1,11 +1,13 @@
 rule bqsr3:
     input:
-        bam="data/aligned/{sample}.bqsr2.bam",
+        bam=DATA + "/aligned/{sample}.bqsr2.bam",
         ref=config["reference"],
         known="results/variants/known_variants.vcf"
     output:
-        bam="data/aligned/{sample}.bqsr3.bam",
-        table="data/aligned/{sample}.recal3.table"
+        bam=DATA + "/aligned/{sample}.bqsr3.bam",
+        table=DATA + "/aligned/{sample}.recal3.table"
+    conda:
+        "../envs/gatk.yaml"
     shell:
         """
         gatk BaseRecalibrator \

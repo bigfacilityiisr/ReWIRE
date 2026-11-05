@@ -1,9 +1,11 @@
 rule final_haplotypecaller:
     input:
-        bam="data/aligned/{sample}.bqsr3.bam",
+        bam=DATA + "/aligned/{sample}.bqsr3.bam",
         ref=config["reference"]
     output:
         "results/variants/{sample}.final.g.vcf"
+    conda:
+        "../envs/gatk.yaml"
     shell:
         """
         gatk HaplotypeCaller \
@@ -22,6 +24,8 @@ rule final_combine:
     params:
         ref=config["reference"],
         gvcfs=lambda wildcards, input: " ".join(f"-V {i}" for i in input)
+    conda:
+        "../envs/gatk.yaml"
     shell:
         """
         gatk CombineGVCFs \
@@ -31,17 +35,24 @@ rule final_combine:
         """
 
 rule final_genotype:
+    # NOTE: previously this rule ignored {input}/{output} entirely and
+    # referenced files ("cohort.g.vcf", "final_all_sites.vcf") that don't
+    # exist anywhere else in the pipeline. Fixed to use the real
+    # input/output and to write a bgzipped, auto-indexed VCF so downstream
+    # rules (workflow/rules/snp_postprocessing.smk) can consume it directly.
     input:
         "results/variants/final_cohort.g.vcf"
     output:
-        "results/variants/final_variants.vcf"
+        vcf="results/variants/final_variants.vcf.gz",
+        tbi="results/variants/final_variants.vcf.gz.tbi"
     params:
         ref=config["reference"]
+    conda:
+        "../envs/gatk.yaml"
     shell:
         """
         gatk GenotypeGVCFs \
         -R {params.ref} \
-        -V cohort.g.vcf\
-        -O final_all_sites.vcf \
-        --include-non-variant-sites
+        -V {input} \
+        -O {output.vcf}
         """

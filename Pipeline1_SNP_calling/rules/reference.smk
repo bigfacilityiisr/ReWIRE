@@ -1,3 +1,5 @@
+import os
+
 rule bwa_index:
     input:
         REF
@@ -8,7 +10,7 @@ rule bwa_index:
         REF + ".pac",
         REF + ".sa"
     conda:
-        "../envs/bwa.yaml"
+        "../envs/mapping.yaml"
     shell:
         """
         bwa index {input}
@@ -20,7 +22,7 @@ rule faidx:
     output:
         REF + ".fai"
     conda:
-        "../envs/samtools.yaml"
+        "../envs/mapping.yaml"
     shell:
         """
         samtools faidx {input}
@@ -30,7 +32,7 @@ rule dict:
     input:
         REF
     output:
-        REF.replace(".fna",".dict")
+        os.path.splitext(REF)[0] + ".dict"
     conda:
         "../envs/gatk.yaml"
     shell:

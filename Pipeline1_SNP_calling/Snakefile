@@ -1,18 +1,20 @@
 configfile: "config/config.yaml"
 REF = config["reference"]
+DATA = config["data_dir"]
 SE_SAMPLES = config["se_samples"]
 PE_SAMPLES = config["pe_samples"]
 SAMPLES = SE_SAMPLES + PE_SAMPLES
 print("Samples:", SAMPLES)
 rule all:
     input:
-        expand("ddrad_raw-reads/{sample}.fastq.gz", sample=SE_SAMPLES),
-        expand("ddrad_raw-reads/{sample}_R1.fastq.gz", sample=PE_SAMPLES),
-        expand("ddrad_raw-reads/{sample}_R2.fastq.gz", sample=PE_SAMPLES),
-        expand("output/fastqc/{sample}_fastqc.html", sample=SE_SAMPLES),
-        expand("output/fastqc/{sample}_R1_fastqc.html", sample=PE_SAMPLES),
-        expand("output/fastqc/{sample}_R2_fastqc.html", sample=PE_SAMPLES),
-        "results/variants/final_variants.vcf"
+        expand(f"{DATA}/fastq/{{sample}}.fastq.gz", sample=SE_SAMPLES),
+        expand(f"{DATA}/fastq/{{sample}}_R1.fastq.gz", sample=PE_SAMPLES),
+        expand(f"{DATA}/fastq/{{sample}}_R2.fastq.gz", sample=PE_SAMPLES),
+        expand(f"{DATA}/fastqc/{{sample}}_fastqc.html", sample=SE_SAMPLES),
+        expand(f"{DATA}/fastqc/{{sample}}_R1_fastqc.html", sample=PE_SAMPLES),
+        expand(f"{DATA}/fastqc/{{sample}}_R2_fastqc.html", sample=PE_SAMPLES),
+        f"{DATA}/multiqc/multiqc_report.html",
+        "results/variants/final_variants.vcf.gz"
 include: "rules/download.smk"
 include: "rules/fasterq.smk"
 include: "rules/fastqc_se.smk"

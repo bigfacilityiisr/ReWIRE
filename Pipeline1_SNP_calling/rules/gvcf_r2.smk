@@ -1,9 +1,11 @@
 rule haplotypecaller_r2:
     input:
-        bam="data/aligned/{sample}.bqsr1.bam",
+        bam=DATA + "/aligned/{sample}.bqsr1.bam",
         ref=config["reference"]
     output:
         "results/variants/{sample}.r2.g.vcf"
+    conda:
+        "../envs/gatk.yaml"
     shell:
         """
         gatk HaplotypeCaller \

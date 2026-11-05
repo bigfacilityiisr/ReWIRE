@@ -1,6 +1,6 @@
 rule haplotypecaller_r1:
     input:
-        bam="data/aligned/{sample}.dedup.bam",
+        bam=DATA + "/aligned/{sample}.dedup.bam",
         ref=config["reference"]
     output:
         "results/variants/{sample}.r1.g.vcf"

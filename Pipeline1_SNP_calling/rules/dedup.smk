@@ -1,9 +1,9 @@
 rule mark_duplicates:
     input:
-        "data/aligned/{sample}.sorted.bam"
+        DATA + "/aligned/{sample}.sorted.bam"
     output:
-        bam="data/aligned/{sample}.dedup.bam",
-        metrics="data/aligned/{sample}.metrics.txt"
+        bam=DATA + "/aligned/{sample}.dedup.bam",
+        metrics=DATA + "/aligned/{sample}.metrics.txt"
     conda:
         "../envs/gatk.yaml"
     shell:
@@ -16,9 +16,11 @@ rule mark_duplicates:
 
 rule index_dedup:
     input:
-        "data/aligned/{sample}.dedup.bam"
+        DATA + "/aligned/{sample}.dedup.bam"
     output:
-        "data/aligned/{sample}.dedup.bam.bai"
+        DATA + "/aligned/{sample}.dedup.bam.bai"
+    conda:
+        "../envs/mapping.yaml"
     shell:
         """
         samtools index {input}

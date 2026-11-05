@@ -5,6 +5,8 @@ DATA = config["data_dir"]
 REF = config["reference"]
 
 rule bwa_mem_pe:
+    wildcard_constraints:
+        sample=PE
     input:
         ref=REF,
         r1=f"{DATA}/trimmed/{{sample}}_R1.fastq.gz",
@@ -13,7 +15,7 @@ rule bwa_mem_pe:
         f"{DATA}/aligned/{{sample}}.sorted.bam"
     threads: 12
     conda:
-        "../envs/bwa.yaml"
+        "../envs/mapping.yaml"
     shell:
         """
         mkdir -p {DATA}/aligned/tmp
@@ -25,6 +27,8 @@ rule bwa_mem_pe:
         """
 
 rule bwa_mem_se:
+    wildcard_constraints:
+        sample=SE
     input:
         ref=REF,
         reads=f"{DATA}/trimmed/{{sample}}.fastq.gz"
@@ -32,7 +36,7 @@ rule bwa_mem_se:
         f"{DATA}/aligned/{{sample}}.sorted.bam"
     threads: 12
     conda:
-        "../envs/bwa.yaml"
+        "../envs/mapping.yaml"
     shell:
         """
         mkdir -p {DATA}/aligned/tmp
